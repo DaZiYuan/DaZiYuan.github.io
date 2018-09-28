@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="巨应工作室官网, MscoderStudio" />
+  <meta name="keywords" content="Golang," />
 
 
 
@@ -77,19 +77,18 @@
 
 
 
-<meta name="description" content="用意： 一个小软件用来提醒长期伏案的电脑使用者保护爱眼 开源项目参与人既是用户也是开发者，有能力的可以自己加需求 代码完全开源，公益类项目。一切的一切都是为了回报社会……  Win10商店安装包用户交流群">
-<meta property="og:type" content="website">
-<meta property="og:title" content="眼睛护士">
-<meta property="og:url" content="http://yoursite.com/products/EyeNurse.html">
+<meta name="description" content="目的记录如何在golang中进行json序列化和反序列化（与结构体互转）操作的相关代码片段 结构体定义123456789101112//大写开头才能在外部包中访问type Tag struct &amp;#123;	CreateTime int    `json:&quot;createTime&quot;` //json tag 用于映射json对应的字段	TagId      int    `json:&quot;tagId&quot;`">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang Json 结构体互转">
+<meta property="og:url" content="http://yoursite.com/2018/09/27/golang_json_conveter/index.html">
 <meta property="og:site_name" content="巨应工作室">
-<meta property="og:description" content="用意： 一个小软件用来提醒长期伏案的电脑使用者保护爱眼 开源项目参与人既是用户也是开发者，有能力的可以自己加需求 代码完全开源，公益类项目。一切的一切都是为了回报社会……  Win10商店安装包用户交流群">
+<meta property="og:description" content="目的记录如何在golang中进行json序列化和反序列化（与结构体互转）操作的相关代码片段 结构体定义123456789101112//大写开头才能在外部包中访问type Tag struct &amp;#123;	CreateTime int    `json:&quot;createTime&quot;` //json tag 用于映射json对应的字段	TagId      int    `json:&quot;tagId&quot;`">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mscoder.cn/res/imgs/products/logo_eyenurse.png">
-<meta property="og:updated_time" content="2018-08-27T03:20:11.406Z">
+<meta property="og:updated_time" content="2018-09-28T03:47:23.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="眼睛护士">
-<meta name="twitter:description" content="用意： 一个小软件用来提醒长期伏案的电脑使用者保护爱眼 开源项目参与人既是用户也是开发者，有能力的可以自己加需求 代码完全开源，公益类项目。一切的一切都是为了回报社会……  Win10商店安装包用户交流群">
-<meta name="twitter:image" content="https://mscoder.cn/res/imgs/products/logo_eyenurse.png">
+<meta name="twitter:title" content="Golang Json 结构体互转">
+<meta name="twitter:description" content="目的记录如何在golang中进行json序列化和反序列化（与结构体互转）操作的相关代码片段 结构体定义123456789101112//大写开头才能在外部包中访问type Tag struct &amp;#123;	CreateTime int    `json:&quot;createTime&quot;` //json tag 用于映射json对应的字段	TagId      int    `json:&quot;tagId&quot;`">
 
 
 
@@ -119,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/products/EyeNurse.html"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/27/golang_json_conveter/"/>
 
 
 
 
 
-  <title>眼睛护士 | 巨应工作室</title>
+  <title>Golang Json 结构体互转 | 巨应工作室</title>
   
 
 
@@ -260,40 +259,201 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/golang_json_conveter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="打字员">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="巨应工作室">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">眼睛护士</h2>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p><center><img style="display:inline !important;width:200px;height:200px" src="https://mscoder.cn/res/imgs/products/logo_eyenurse.png"></center></p>
-<h2 id="用意："><a href="#用意：" class="headerlink" title="用意："></a>用意：</h2><ul>
-<li>一个小软件用来提醒长期伏案的电脑使用者保护爱眼</li>
-<li>开源项目参与人既是用户也是开发者，有能力的可以自己加需求</li>
-<li>代码完全开源，公益类项目。一切的一切都是为了回报社会……</li>
-</ul>
-<p><a href="https://www.microsoft.com/zh-cn/p/%E7%9C%BC%E7%9D%9B%E6%8A%A4%E5%A3%AB/9np76pb0d07c?rtc=1" target="_blank" rel="noopener">Win10商店</a><br><a href="https://github.com/MscoderStudio/EyeNurse/releases" target="_blank" rel="noopener">安装包</a><br><a href="/about/contact.html">用户交流群</a></p>
-
+          <h2 class="post-title" itemprop="name headline">Golang Json 结构体互转</h2>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-27T11:34:00+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-28T11:47:23+08:00">
+                2018-09-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang-代码片段/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang 代码片段</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/27/golang_json_conveter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/27/golang_json_conveter/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/09/27/golang_json_conveter/" class="leancloud_visitors" data-flag-title="Golang Json 结构体互转">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>记录如何在golang中进行json序列化和反序列化（与结构体互转）操作的相关代码片段</p>
+<h4 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//大写开头才能在外部包中访问</span></span><br><span class="line"><span class="keyword">type</span> Tag <span class="keyword">struct</span> &#123;</span><br><span class="line">	CreateTime <span class="keyword">int</span>    <span class="string">`json:"createTime"`</span> <span class="comment">//json tag 用于映射json对应的字段</span></span><br><span class="line">	TagId      <span class="keyword">int</span>    <span class="string">`json:"tagId"`</span></span><br><span class="line">	IsDelete   <span class="keyword">int</span>    <span class="string">`json:"isDelete"`</span></span><br><span class="line">	TagName    <span class="keyword">string</span> <span class="string">`json:"tagName"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tags <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data []Tag <span class="string">`json:"data"`</span></span><br><span class="line">	Flag <span class="keyword">bool</span>  <span class="string">`json:"flag"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解析Json字符串转为结构体"><a href="#解析Json字符串转为结构体" class="headerlink" title="解析Json字符串转为结构体"></a>解析Json字符串转为结构体</h4><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetTags</span><span class="params">()</span> <span class="params">(result Tags, err error)</span></span> &#123;</span><br><span class="line">	<span class="comment">//请求服务器获取json</span></span><br><span class="line">	res, err := http.Get(<span class="string">"http://wallpaper.upupoo.com/async/getTags.htm?callback="</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	body, err := ioutil.ReadAll(res.Body)</span><br><span class="line">	res.Body.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//多了两个括号需要移除掉</span></span><br><span class="line">	tmpJson := <span class="keyword">string</span>(body[<span class="number">1</span> : <span class="built_in">len</span>(body)<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line">	<span class="comment">// // 用字符串声明的方式</span></span><br><span class="line">	<span class="comment">// tmpJson = `(&#123;"data":[&#123;"createTime":1483243995000,"tagId":0,"isDelete":1,"tagName":"全部"&#125;,&#123;"createTime":1483519853000,"tagId":2,"isDelete":1,"tagName":"游戏风象"&#125;,&#123;"createTime":1483519857000,"tagId":3,"isDelete":1,"tagName":"鬼畜"&#125;,&#123;"createTime":1483596223000,"tagId":4,"isDelete":1,"tagName":"绝对领域"&#125;,&#123;"createTime":1483596225000,"tagId":5,"isDelete":1,"tagName":"女朋友"&#125;,&#123;"createTime":1483883866000,"tagId":6,"isDelete":1,"tagName":"萌物"&#125;,&#123;"createTime":1483883879000,"tagId":7,"isDelete":1,"tagName":"美の風景"&#125;,&#123;"createTime":1483883899000,"tagId":9,"isDelete":1,"tagName":"神曲"&#125;,&#123;"createTime":1483883912000,"tagId":11,"isDelete":1,"tagName":"解忧杂货铺"&#125;,&#123;"createTime":1484084578000,"tagId":12,"isDelete":1,"tagName":"ACG动漫"&#125;,&#123;"createTime":1484084588000,"tagId":13,"isDelete":1,"tagName":"艺术感知"&#125;,&#123;"createTime":1484328498000,"tagId":1,"isDelete":1,"tagName":"抖不停"&#125;,&#123;"createTime":1484333623000,"tagId":10,"isDelete":1,"tagName":"科幻世界"&#125;],"flag":true&#125;)`</span></span><br><span class="line">	<span class="comment">// runes := []rune(tmpJson)</span></span><br><span class="line">	<span class="comment">// // 处理多余的括号</span></span><br><span class="line">	<span class="comment">// tmpJson = string(runes[1 : len(runes)-1])</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 反序列化</span></span><br><span class="line">	err = json.Unmarshal([]<span class="keyword">byte</span>(tmpJson), &amp;result)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/27/hello-world/" rel="next" title="创世篇">
+                <i class="fa fa-chevron-left"></i> 创世篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -426,7 +586,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用意："><span class="nav-number">1.</span> <span class="nav-text">用意：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体定义"><span class="nav-number">2.</span> <span class="nav-text">结构体定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析Json字符串转为结构体"><span class="nav-number">3.</span> <span class="nav-text">解析Json字符串转为结构体</span></a></li></ol></div>
             
 
           </div>
@@ -596,9 +756,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/products/EyeNurse.html';
-          this.page.identifier = 'products/EyeNurse.html';
-          this.page.title = '眼睛护士';
+          this.page.url = 'http://yoursite.com/2018/09/27/golang_json_conveter/';
+          this.page.identifier = '2018/09/27/golang_json_conveter/';
+          this.page.title = 'Golang Json 结构体互转';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://mscoder.disqus.com/embed.js';
