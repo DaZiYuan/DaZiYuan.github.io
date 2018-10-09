@@ -1,0 +1,19 @@
+#hexo robots.txt
+User-agent: *
+
+Allow: /
+Allow: /categories/
+Allow: /tags/
+Allow: /products/
+Allow: /about/
+Allow: /members/
+
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: https://mscoder.cn/sitemap.xml
+Sitemap: https://mscoder.cn/baidusitemap.xml
