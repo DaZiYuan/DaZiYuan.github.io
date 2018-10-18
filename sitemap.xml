@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.mscoder.cn/uwp/Broader-file-system-access.html</loc>
+    <loc>https://www.mscoder.cn/uwp/default-style-dir.html</loc>
     
-    <lastmod>2018-10-15T02:45:43.184Z</lastmod>
+    <lastmod>2018-10-18T02:09:08.005Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.mscoder.cn/Markdown-%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87.html</loc>
+    <loc>https://www.mscoder.cn/Markdown.html</loc>
     
-    <lastmod>2018-10-15T02:05:48.627Z</lastmod>
+    <lastmod>2018-10-18T02:08:54.781Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mscoder.cn/uwp/Broader-file-system-access.html</loc>
+    
+    <lastmod>2018-10-15T02:45:43.184Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>https://www.mscoder.cn/uwp/reference-dict-in-other-library.html</loc>
     
     <lastmod>2018-10-09T16:18:45.908Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.mscoder.cn/uwp/default-style-dir.html</loc>
-    
-    <lastmod>2018-10-09T08:14:43.421Z</lastmod>
     
   </url>
   

@@ -376,13 +376,17 @@
       
         
           
-            <h5 id="概要："><a href="#概要：" class="headerlink" title="概要："></a>概要：</h5><p>曾经UWP只能读写当前应用的存储目录。<br>2018年微软开放了一种更广泛的IO读写权限，使UWP可以像传统应用程序一样读写几乎所有目录。让UWP的能力更上一层楼。</p>
-<p><a href="https://blogs.windows.com/buildingapps/2018/02/23/windows-community-standup-discussing-multi-instancing-console-uwps-broader-file-system-access/#lDQ5SHeBiXKQsbHM.97" target="_blank" rel="noopener">相关连接</a></p>
-<h5 id="如何开启："><a href="#如何开启：" class="headerlink" title="如何开启："></a>如何开启：</h5><p>打开Package.appxmanifest。<br>添加命名空间rescap，并将其添加到IgnorableNamespaces：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Package</span></span></span><br><span class="line"><span class="tag">  <span class="attr">...</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:rescap</span>=<span class="string">"http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">IgnorableNamespaces</span>=<span class="string">"uap mp uap5 rescap"</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">Capabilities</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rescap:Capability</span> <span class="attr">Name</span>=<span class="string">"broadFileSystemAccess"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Capabilities</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h5 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件:"></a>创建文件:</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写入文件</span></span><br><span class="line">    <span class="keyword">string</span> dir = <span class="string">"d:\\"</span>;</span><br><span class="line">    <span class="keyword">string</span> fileName = <span class="string">"sample.txt"</span>;</span><br><span class="line">    <span class="keyword">string</span> fullPath = Path.Combine(dir, fileName);</span><br><span class="line">    StorageFolder storageFolder = <span class="keyword">await</span> StorageFolder.GetFolderFromPathAsync(dir);</span><br><span class="line">    StorageFile writeFile = <span class="keyword">await</span> storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);</span><br><span class="line">    <span class="keyword">await</span> FileIO.WriteTextAsync(writeFile, DateTime.Now.ToString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取文件</span></span><br><span class="line">    StorageFile readFile = <span class="keyword">await</span> storageFolder.GetFileAsync(fileName);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//全路径读取</span></span><br><span class="line">    <span class="comment">//StorageFile readFile = await StorageFile.GetFileFromPathAsync(fullPath);</span></span><br><span class="line">    <span class="keyword">var</span> stream = <span class="keyword">await</span> readFile.OpenAsync(FileAccessMode.Read);</span><br><span class="line">    <span class="keyword">ulong</span> size = stream.Size;</span><br><span class="line">    <span class="keyword">using</span> (<span class="keyword">var</span> inputStream = stream.GetInputStreamAt(<span class="number">0</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> (<span class="keyword">var</span> dataReader = <span class="keyword">new</span> Windows.Storage.Streams.DataReader(inputStream))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">uint</span> numBytesLoaded = <span class="keyword">await</span> dataReader.LoadAsync((<span class="keyword">uint</span>)size);</span><br><span class="line">            <span class="keyword">string</span> text = dataReader.ReadString(numBytesLoaded);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>测试发现系统盘根目录还是没有权限，其他目录可以。已经可以满足大多数需求了。</p>
-
-          
+          概要：曾经UWP只能读写当前应用的存储目录。2018年微软开放了一种更广泛的IO读写权限，使UWP可以像传统应用程序一样读写几乎所有目录。让UWP的能力更上一层楼。
+相关连接
+如何开启：打开Package.appxmanifest。添加命名空间rescap，并将其添加到IgnorableNamesp
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/uwp/Broader-file-system-access.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -429,7 +433,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.mscoder.cn/Markdown-插入图片.html">
+    <link itemprop="mainEntityOfPage" href="https://www.mscoder.cn/Markdown.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="打字员">
@@ -448,7 +452,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/Markdown-插入图片.html" itemprop="url">Markdown 常用笔记</a></h2>
+                <a class="post-title-link" href="/Markdown.html" itemprop="url">Markdown 常用笔记</a></h2>
         
 
         <div class="post-meta">
@@ -476,8 +480,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T10:05:48+08:00">
-                2018-10-15
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-18T10:08:54+08:00">
+                2018-10-18
               </time>
             
           </span>
@@ -512,7 +516,7 @@
 
           
           
-             <span id="/Markdown-插入图片.html" class="leancloud_visitors" data-flag-title="Markdown 常用笔记">
+             <span id="/Markdown.html" class="leancloud_visitors" data-flag-title="Markdown 常用笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -545,21 +549,28 @@
       
         
           
-            <ul>
-<li><p>插入图片</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">Image text</span>](<span class="link"> 这里是你的图片链接,相对绝对路径都可以</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>换行</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello  (&lt;-- two spaces) 或者 &lt;br /&gt;</span><br><span class="line">World</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>插入空白格</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;#160; 或者 &amp;nbsp;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>超链接</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">文本</span>](<span class="link">url</span>)</span><br></pre></td></tr></table></figure></li>
-</ul>
+          
+插入图片
+1![Image text]( 这里是你的图片链接,相对绝对路径都可以)
+
+换行
+12Hello  (&lt;-- two spaces) 或者 &lt;br /&gt;World
+
+插入空白格
+1&amp;#160; 或者 &amp;nbsp;
+
+超链接
+1[文本](url)
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Markdown.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -700,11 +711,16 @@
       
         
           
-            <h6 id="如果样式库和调用库不是在同一解决方案中，首先要在样式库的属性页中勾选”Generate-library-layout”"><a href="#如果样式库和调用库不是在同一解决方案中，首先要在样式库的属性页中勾选”Generate-library-layout”" class="headerlink" title="如果样式库和调用库不是在同一解决方案中，首先要在样式库的属性页中勾选”Generate library layout”"></a>如果样式库和调用库不是在同一解决方案中，首先要在样式库的属性页中勾选”Generate library layout”</h6><p><img src="/res/imgs/posts/Fh20j.jpg" alt="图片"></p>
-<h6 id="引用代码："><a href="#引用代码：" class="headerlink" title="引用代码："></a>引用代码：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ResourceDictionary&gt;</span><br><span class="line">    &lt;ResourceDictionary.MergedDictionaries&gt;</span><br><span class="line">        &lt;ResourceDictionary Source=&quot;ClassLibrary1/Styles/Custom.xaml&quot; /&gt;</span><br><span class="line">        &lt;ResourceDictionary Source=&quot;ClassLibrary1/Styles/ButtonStyle.xaml&quot;/&gt;</span><br><span class="line">        &lt;ResourceDictionary Source=&quot;ClassLibrary1/Styles/ListsStyle.xaml&quot;/&gt;</span><br><span class="line">    &lt;/ResourceDictionary.MergedDictionaries&gt;</span><br><span class="line">&lt;/ResourceDictionary&gt;</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ResourceDictionary&gt;</span><br><span class="line">    &lt;ResourceDictionary.MergedDictionaries&gt;</span><br><span class="line">        &lt;ResourceDictionary Source=&quot;ms-appx:///ClassLibrary1/Styles/Custom.xaml&quot; /&gt;</span><br><span class="line">        &lt;ResourceDictionary Source=&quot;ms-appx:///ClassLibrary1/Styles/ButtonStyle.xaml&quot;/&gt;</span><br><span class="line">        &lt;ResourceDictionary Source=&quot;ms-appx:///ClassLibrary1/Styles/ListsStyle.xaml&quot;/&gt;</span><br><span class="line">    &lt;/ResourceDictionary.MergedDictionaries&gt;</span><br><span class="line">&lt;/ResourceDictionary&gt;</span><br></pre></td></tr></table></figure></p>
-
-          
+          如果样式库和调用库不是在同一解决方案中，首先要在样式库的属性页中勾选”Generate library layout”
+引用代码：1234567&lt;ResourceDictionary&gt;    &lt;ResourceDictionary.MergedDictionaries&gt;   
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/uwp/reference-dict-in-other-library.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -867,14 +883,21 @@
       
         
           
-            <h5 id="解决以下问题"><a href="#解决以下问题" class="headerlink" title="解决以下问题:"></a>解决以下问题:</h5><ul>
-<li>Hexo 插入代码段有时候会显示垂直滚动条导致无法滚动问题</li>
-<li>超出边框会显示横向滚动条难看问题</li>
-</ul>
-<h5 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h5><p>打开这个文件<br>themes\next\source\css_common\components\highlight\highlight.styl</p>
-<h5 id="第二布："><a href="#第二布：" class="headerlink" title="第二布："></a>第二布：</h5><p>按下面代码修改样式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.code</span> <span class="selector-tag">pre</span> &#123;</span><br><span class="line">// width: 100%  注释这句或者下面两句，解决有时候会显示垂直滚动条问题</span><br><span class="line">  <span class="selector-tag">padding-left</span>: 10<span class="selector-tag">px</span></span><br><span class="line">  <span class="selector-tag">padding-right</span>: 10<span class="selector-tag">px</span></span><br><span class="line">  background-color: $highlight-background</span><br><span class="line">  white-space: pre-wrap  //自动换行，不显示横向滚动条</span><br><span class="line">  word-wrap: break-word  //自动换行，不显示横向滚动条</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          解决以下问题:
+Hexo 插入代码段有时候会显示垂直滚动条导致无法滚动问题
+超出边框会显示横向滚动条难看问题
+
+第一步：打开这个文件themes\next\source\css_common\components\highlight\highlight.styl
+第二布：按下面代码修改样式
+1234
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/hexo/disable-scrollbar.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -940,7 +963,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/uwp/default-style-dir.html" itemprop="url">UWP 默认样式目录</a></h2>
+                <a class="post-title-link" href="/uwp/default-style-dir.html" itemprop="url">UWP 默认样式文件目录</a></h2>
         
 
         <div class="post-meta">
@@ -968,8 +991,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-09T16:14:43+08:00">
-                2018-10-09
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-18T10:09:08+08:00">
+                2018-10-18
               </time>
             
           </span>
@@ -1004,7 +1027,7 @@
 
           
           
-             <span id="/uwp/default-style-dir.html" class="leancloud_visitors" data-flag-title="UWP 默认样式目录">
+             <span id="/uwp/default-style-dir.html" class="leancloud_visitors" data-flag-title="UWP 默认样式文件目录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1037,9 +1060,15 @@
       
         
           
-            <p>UWP默认样式保存目录，可以看看系统默认样式加以修改达到自己的效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Windows Kits\10\DesignTime\CommonConfiguration\Neutral\UAP\**系统版本号\Generic\generic.xaml</span><br><span class="line"></span><br><span class="line">例如:</span><br><span class="line">C:\Program Files (x86)\Windows Kits\10\DesignTime\CommonConfiguration\Neutral\UAP\10.0.17134.0\Generic\generic.xaml</span><br></pre></td></tr></table></figure></p>
-
-          
+          UWP默认样式保存目录，可以看看系统默认样式加以修改达到自己的效果1234C:\Program Files (x86)\Windows Kits\10\DesignTime\CommonConfiguration\Neutral\UAP\**系统版本号\Generic\generic.xaml例如:
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/uwp/default-style-dir.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1202,9 +1231,16 @@
       
         
           
-            <h5 id="利用ES2015原生支持的querySelectorAll查找包含指定文本的元素"><a href="#利用ES2015原生支持的querySelectorAll查找包含指定文本的元素" class="headerlink" title="利用ES2015原生支持的querySelectorAll查找包含指定文本的元素"></a>利用ES2015原生支持的querySelectorAll查找包含指定文本的元素</h5><p>例如查找steam市场页面的所有撤下按钮:<br>steamcommunity.com/market/</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找所有</span></span><br><span class="line"><span class="built_in">Array</span>.from(</span><br><span class="line">                    <span class="built_in">document</span>.querySelectorAll(<span class="string">".item_market_action_button_contents"</span>)</span><br><span class="line">                ).filter(<span class="function"><span class="params">el</span> =&gt;</span> el.innerText === <span class="string">'撤下'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//查找第一个</span></span><br><span class="line"><span class="built_in">Array</span>.from(</span><br><span class="line">                    <span class="built_in">document</span>.querySelectorAll(<span class="string">".item_market_action_button_contents"</span>)</span><br><span class="line">                ).find(<span class="function"><span class="params">el</span> =&gt;</span> el.innerText === <span class="string">'撤下'</span>);</span><br></pre></td></tr></table></figure>
-          
+          利用ES2015原生支持的querySelectorAll查找包含指定文本的元素例如查找steam市场页面的所有撤下按钮:steamcommunity.com/market/
+123456789//查找所有Array.from(                    document.querySe
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/javascript/filter-elements.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1367,13 +1403,15 @@
       
         
           
-            <h4 id="记录如何把切片转换为另一个不同结构体的切片"><a href="#记录如何把切片转换为另一个不同结构体的切片" class="headerlink" title="记录如何把切片转换为另一个不同结构体的切片"></a>记录如何把切片转换为另一个不同结构体的切片</h4><p>结构体A：<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//大写开头才能在外部包中访问</span></span><br><span class="line"><span class="keyword">type</span> UTag <span class="keyword">struct</span> &#123;</span><br><span class="line">	CreateTime <span class="keyword">int</span>    <span class="string">`json:"createTime"`</span> <span class="comment">//Jsontag 是映射json对应的字段</span></span><br><span class="line">	TagId      <span class="keyword">int</span>    <span class="string">`json:"tagId"`</span></span><br><span class="line">	IsDelete   <span class="keyword">int</span>    <span class="string">`json:"isDelete"`</span></span><br><span class="line">	TagName    <span class="keyword">string</span> <span class="string">`json:"tagName"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> UTags <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data []UTag <span class="string">`json:"data"`</span></span><br><span class="line">	Flag <span class="keyword">bool</span>   <span class="string">`json:"flag"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结构体B:<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Tag <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID   <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="功能：把UTags-Data转换成-Tag"><a href="#功能：把UTags-Data转换成-Tag" class="headerlink" title="功能：把UTags.Data转换成 []Tag"></a>功能：把UTags.Data转换成 []Tag</h4><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetTags</span><span class="params">()</span> <span class="params">(result []model.Tag, err error)</span></span> &#123;</span><br><span class="line">	<span class="comment">//请求服务器获取json</span></span><br><span class="line">	res, err := http.Get(<span class="string">"http://wallpaper.upupoo.com/async/getTags.htm?callback="</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	body, err := ioutil.ReadAll(res.Body)</span><br><span class="line">	res.Body.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//多了两个括号需要移除掉</span></span><br><span class="line">	tmpJson := <span class="keyword">string</span>(body[<span class="number">1</span> : <span class="built_in">len</span>(body)<span class="number">-1</span>])</span><br><span class="line">	<span class="comment">// 反序列化</span></span><br><span class="line">	<span class="keyword">var</span> temp UTags</span><br><span class="line">	err = json.Unmarshal([]<span class="keyword">byte</span>(tmpJson), &amp;temp)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// UTags转换成标准Tags</span></span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> temp.Data &#123;</span><br><span class="line">		result = <span class="built_in">append</span>(result, model.Tag&#123;ID: v.TagId, Name: v.TagName&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是我开发 <a href="https://github.com/MscoderStudio/LiveWallpaperServer" target="_blank" rel="noopener">解析第三方壁纸服务</a> 中的代码，记录一下Golang的自学过程，也希望帮到和我遇到一样问题的人。</p>
-<p>巨应工作室第一年，国庆快乐~</p>
-
-          
+          记录如何把切片转换为另一个不同结构体的切片结构体A：123456789101112//大写开头才能在外部包中访问type UTag struct &#123;	CreateTime int    `json:"createTime"` //Jsontag 是映射json对应的字段	TagId    
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/golang/slice_map.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1536,10 +1574,15 @@
       
         
           
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait</span><span class="params">(timeout_ms, calback=None)</span>:</span></span><br><span class="line">    <span class="string">'''等待指定时间</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        timeout_ms &#123;[type]&#125; -- [等待指定毫秒数]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Keyword Arguments:</span></span><br><span class="line"><span class="string">        calback &#123;[type]&#125; -- [每一秒触发一次回调，回调参数是剩余的秒数] (default: &#123;None&#125;)</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    now = datetime.datetime.now()</span><br><span class="line">    endTime = now+datetime.timedelta(milliseconds=timeout_ms)</span><br><span class="line">    timespane = endTime-now</span><br><span class="line">    <span class="keyword">while</span> timespane.seconds &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span>(calback <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>):</span><br><span class="line">            calback(timespane.seconds)</span><br><span class="line">        now = datetime.datetime.now()</span><br><span class="line">        timespane = endTime-now</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback</span><span class="params">(remain_seconds)</span>:</span></span><br><span class="line">    print(<span class="string">"剩余"</span>, remain_seconds)</span><br><span class="line"></span><br><span class="line">wait(<span class="number">5</span>, callback)</span><br><span class="line">print(<span class="string">'end'</span>)</span><br></pre></td></tr></table></figure>
-<p>输出结果：<br>剩余 5<br>剩余 4<br>剩余 3<br>剩余 2<br>剩余 1<br>end</p>
-
-          
+          12345678910111213141516171819202122232425262728import datetimeimport timedef wait(timeout_ms, calback=None):    '''等待指定时间    Arguments:        timeout
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/datetime.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1702,10 +1745,16 @@
       
         
           
-            <h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>记录如何在golang中进行json序列化和反序列化（与结构体互转）操作的相关代码片段</p>
-<h4 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//大写开头才能在外部包中访问</span></span><br><span class="line"><span class="keyword">type</span> Tag <span class="keyword">struct</span> &#123;</span><br><span class="line">	CreateTime <span class="keyword">int</span>    <span class="string">`json:"createTime"`</span> <span class="comment">//json tag 用于映射json对应的字段</span></span><br><span class="line">	TagId      <span class="keyword">int</span>    <span class="string">`json:"tagId"`</span></span><br><span class="line">	IsDelete   <span class="keyword">int</span>    <span class="string">`json:"isDelete"`</span></span><br><span class="line">	TagName    <span class="keyword">string</span> <span class="string">`json:"tagName"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tags <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data []Tag <span class="string">`json:"data"`</span></span><br><span class="line">	Flag <span class="keyword">bool</span>  <span class="string">`json:"flag"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="解析Json字符串转为结构体"><a href="#解析Json字符串转为结构体" class="headerlink" title="解析Json字符串转为结构体"></a>解析Json字符串转为结构体</h4><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetTags</span><span class="params">()</span> <span class="params">(result Tags, err error)</span></span> &#123;</span><br><span class="line">	<span class="comment">//请求服务器获取json</span></span><br><span class="line">	res, err := http.Get(<span class="string">"http://wallpaper.upupoo.com/async/getTags.htm?callback="</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	body, err := ioutil.ReadAll(res.Body)</span><br><span class="line">	res.Body.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//多了两个括号需要移除掉</span></span><br><span class="line">	tmpJson := <span class="keyword">string</span>(body[<span class="number">1</span> : <span class="built_in">len</span>(body)<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line">	<span class="comment">// // 用字符串声明的方式</span></span><br><span class="line">	<span class="comment">// tmpJson = `(&#123;"data":[&#123;"createTime":1483243995000,"tagId":0,"isDelete":1,"tagName":"全部"&#125;,&#123;"createTime":1483519853000,"tagId":2,"isDelete":1,"tagName":"游戏风象"&#125;,&#123;"createTime":1483519857000,"tagId":3,"isDelete":1,"tagName":"鬼畜"&#125;,&#123;"createTime":1483596223000,"tagId":4,"isDelete":1,"tagName":"绝对领域"&#125;,&#123;"createTime":1483596225000,"tagId":5,"isDelete":1,"tagName":"女朋友"&#125;,&#123;"createTime":1483883866000,"tagId":6,"isDelete":1,"tagName":"萌物"&#125;,&#123;"createTime":1483883879000,"tagId":7,"isDelete":1,"tagName":"美の風景"&#125;,&#123;"createTime":1483883899000,"tagId":9,"isDelete":1,"tagName":"神曲"&#125;,&#123;"createTime":1483883912000,"tagId":11,"isDelete":1,"tagName":"解忧杂货铺"&#125;,&#123;"createTime":1484084578000,"tagId":12,"isDelete":1,"tagName":"ACG动漫"&#125;,&#123;"createTime":1484084588000,"tagId":13,"isDelete":1,"tagName":"艺术感知"&#125;,&#123;"createTime":1484328498000,"tagId":1,"isDelete":1,"tagName":"抖不停"&#125;,&#123;"createTime":1484333623000,"tagId":10,"isDelete":1,"tagName":"科幻世界"&#125;],"flag":true&#125;)`</span></span><br><span class="line">	<span class="comment">// runes := []rune(tmpJson)</span></span><br><span class="line">	<span class="comment">// // 处理多余的括号</span></span><br><span class="line">	<span class="comment">// tmpJson = string(runes[1 : len(runes)-1])</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 反序列化</span></span><br><span class="line">	err = json.Unmarshal([]<span class="keyword">byte</span>(tmpJson), &amp;result)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          目的记录如何在golang中进行json序列化和反序列化（与结构体互转）操作的相关代码片段
+结构体定义123456789101112//大写开头才能在外部包中访问type Tag struct &#123;	CreateTime int    `json:"createTime"` //json t
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/golang/json_conveter.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1846,9 +1895,16 @@
       
         
           
-            <p>Make A Big News</p>
+          Make A Big News
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/hello-world.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
