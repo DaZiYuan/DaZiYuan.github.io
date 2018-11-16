@@ -2,16 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.mscoder.cn/javascript/debug-main-process-electron-react-boilerplate.html</loc>
+    <loc>https://www.mscoder.cn/about/contact.html</loc>
     
-    <lastmod>2018-11-13T09:17:51.557Z</lastmod>
+    <lastmod>2018-11-16T02:47:45.236Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mscoder.cn/about/index.html</loc>
+    
+    <lastmod>2018-11-16T02:43:35.215Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.mscoder.cn/products/LiveWallpaper.html</loc>
     
-    <lastmod>2018-10-24T05:20:40.314Z</lastmod>
+    <lastmod>2018-11-16T02:41:06.621Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mscoder.cn/products/EyeNurse.html</loc>
+    
+    <lastmod>2018-11-16T02:40:24.054Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mscoder.cn/javascript/debug-main-process-electron-react-boilerplate.html</loc>
+    
+    <lastmod>2018-11-13T09:17:51.557Z</lastmod>
     
   </url>
   
@@ -86,20 +107,6 @@
   </url>
   
   <url>
-    <loc>https://www.mscoder.cn/about/index.html</loc>
-    
-    <lastmod>2018-10-08T06:40:36.441Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.mscoder.cn/products/EyeNurse.html</loc>
-    
-    <lastmod>2018-09-29T15:11:59.942Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.mscoder.cn/members/index.html</loc>
     
     <lastmod>2018-09-28T07:53:04.741Z</lastmod>
@@ -124,13 +131,6 @@
     <loc>https://www.mscoder.cn/tags/index.html</loc>
     
     <lastmod>2018-09-28T07:49:49.486Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.mscoder.cn/about/contact.html</loc>
-    
-    <lastmod>2018-08-27T03:19:41.991Z</lastmod>
     
   </url>
   
